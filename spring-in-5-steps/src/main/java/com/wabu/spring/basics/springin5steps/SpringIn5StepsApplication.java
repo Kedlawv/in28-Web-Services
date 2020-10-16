@@ -6,8 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringIn5StepsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringIn5StepsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringIn5StepsApplication.class, args);
+
+        BinarySearchImpl binarySearch = new BinarySearchImpl();
+        int result = binarySearch.binarySearch(new int[]{23, 556, 3, 2, 7}, 2);
+        System.out.println("result: " + result);
+    }
 
 }
