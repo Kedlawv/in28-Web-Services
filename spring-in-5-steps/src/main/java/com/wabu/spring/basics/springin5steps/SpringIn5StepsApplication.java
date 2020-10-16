@@ -9,7 +9,8 @@ public class SpringIn5StepsApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringIn5StepsApplication.class, args);
 
-        BinarySearchImpl binarySearch = new BinarySearchImpl();
+        BinarySearchImpl binarySearch = new BinarySearchImpl(new BubbleSort());
+        
         int result = binarySearch.binarySearch(new int[]{23, 556, 3, 2, 7}, 2);
         System.out.println("result: " + result);
     }
