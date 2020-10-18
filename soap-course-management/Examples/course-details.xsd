@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://wabu/courses"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="GetCourseDetailsRequest" type="cour:GetCourseDetailsRequestType"
+                xmlns:cour="http://wabu/courses"/>
+    <xs:complexType name="GetCourseDetailsRequestType">
+        <xs:sequence>
+            <xs:element type="xs:integer" name="id"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
