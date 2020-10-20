@@ -16,11 +16,13 @@ public class CourseDetailsEndPoint {
     public GetCourseDetailsResponse processCourseDetailsRequest(@RequestPayload GetCourseDetailsRequest request) {
 
         CourseDetails courseDetails = new CourseDetails();
+        GetCourseDetailsResponse response = new GetCourseDetailsResponse();
+
         courseDetails.setId(request.getId());
         courseDetails.setName("Microservices Course");
         courseDetails.setDescription("A wonderful course");
-
-        GetCourseDetailsResponse response = new GetCourseDetailsResponse();
+        
+        response.setCourseDetails(courseDetails);
         return response;
     }
 }
