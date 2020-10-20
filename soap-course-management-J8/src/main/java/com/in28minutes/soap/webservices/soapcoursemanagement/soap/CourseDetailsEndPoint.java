@@ -1,8 +1,6 @@
 package com.in28minutes.soap.webservices.soapcoursemanagement.soap;
 
-import com.in28minutes.courses.CourseDetails;
-import com.in28minutes.courses.GetCourseDetailsRequest;
-import com.in28minutes.courses.GetCourseDetailsResponse;
+import com.in28minutes.courses.*;
 import com.in28minutes.soap.webservices.soapcoursemanagement.soap.beans.Course;
 import com.in28minutes.soap.webservices.soapcoursemanagement.soap.service.CourseDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,9 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Endpoint
 public class CourseDetailsEndPoint {
@@ -21,18 +22,37 @@ public class CourseDetailsEndPoint {
     @ResponsePayload
     public GetCourseDetailsResponse processCourseDetailsRequest(@RequestPayload GetCourseDetailsRequest request) {
         Course course = service.findById(request.getId());
-        return mapCourse(course);
+        GetCourseDetailsResponse response = new GetCourseDetailsResponse();
+        response.setCourseDetails(mapCourse(course));
+        return response;
     }
 
-    private GetCourseDetailsResponse mapCourse(Course course) {
+    @PayloadRoot(namespace = "http://in28minutes.com/courses", localPart = "GetAllCourseDetailsRequest")
+    @ResponsePayload
+    public GetAllCourseDetailsResponse processAllCourseDetailsRequest(@RequestPayload GetAllCourseDetailsRequest request) {
+        GetAllCourseDetailsResponse response = new GetAllCourseDetailsResponse();
+        response.getCourseDetails().addAll(mapAll());
+        return response;
+    }
+
+    private CourseDetails mapCourse(Course course) {
         CourseDetails courseDetails = new CourseDetails();
-        GetCourseDetailsResponse response = new GetCourseDetailsResponse();
 
         courseDetails.setId(course.getId());
         courseDetails.setName(course.getName());
         courseDetails.setDescription(course.getDescription());
 
-        response.setCourseDetails(courseDetails);
-        return response;
+        return courseDetails;
+    }
+
+    private List<CourseDetails> mapAll() {
+        List<CourseDetails> coursesDetails = new ArrayList<>();
+        List<Course> courses = service.findAll();
+
+        for (Course course : courses) {
+            coursesDetails.add(mapCourse(course));
+        }
+
+        return coursesDetails;
     }
 }
