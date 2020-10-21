@@ -39,8 +39,16 @@ public class CourseDetailsEndPoint {
     @ResponsePayload
     public DeleteCourseDetailsResponse processDeleteCourseDetailsRequest(@RequestPayload DeleteCourseDetailsRequest request) {
         DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
-        response.setStatus(service.deleteById(request.getId()));
+        CourseDetailsService.Status status = service.deleteById(request.getId());
+        response.setStatus(mapStatus(status));
         return response;
+    }
+
+    private Status mapStatus(CourseDetailsService.Status status) {
+        if(status.name().equals(Status.FAILURE.value())){
+            return Status.FAILURE;
+        }
+        else return Status.SUCCESS;
     }
 
     private CourseDetails mapCourse(Course course) {
