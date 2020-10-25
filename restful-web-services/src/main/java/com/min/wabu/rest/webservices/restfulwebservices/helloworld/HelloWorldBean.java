@@ -1,4 +1,4 @@
-package com.min.wabu.rest.webservices.restfulwebservices;
+package com.min.wabu.rest.webservices.restfulwebservices.helloworld;
 
 public class HelloWorldBean {
     private final String message;
