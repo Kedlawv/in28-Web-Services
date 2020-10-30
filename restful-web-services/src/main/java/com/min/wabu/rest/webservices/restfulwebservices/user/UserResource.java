@@ -22,7 +22,7 @@ public class UserResource {
     @GetMapping("/users/{id}")
     public User retrieveUser(@PathVariable int id) {
         User user = service.findById(id);
-        if(user == null){
+        if (user == null) {
             throw new UserNotFoundException("id-> " + id);
         }
         return user;
@@ -38,6 +38,14 @@ public class UserResource {
                 .buildAndExpand(savedUser.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteById(@PathVariable int id) {
+        User user = service.deleteById(id);
+        if (user == null) {
+            throw new UserNotFoundException("id -> " + id);
+        }
     }
 }
 
