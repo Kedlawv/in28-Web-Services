@@ -17,6 +17,6 @@ public class UserDAOService {
     public long insert(User user) {
         entityManager.persist(user);
         return user.getId();
-        
+
     }
 }
