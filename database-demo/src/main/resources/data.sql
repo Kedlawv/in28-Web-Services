@@ -8,4 +8,6 @@ create table person (
 
 insert into person (id, name, location, birth_date) values(1001, 'Kedlaw','Rzeszow',sysdate());
 insert into person (id, name, location, birth_date) values(1002, 'Gandalf','MiddleEarth',sysdate());
-insert into person (id, name, location, birth_date) values(1003, 'Neo','Zion',sysdate());
+insert into person (id, name, location, birth_date) values(1003, 'Frodo','MiddleEarth',sysdate());
+insert into person (id, name, location, birth_date) values(1004, 'Legolas','MiddleEarth',sysdate());
+insert into person (id, name, location, birth_date) values(1005, 'Neo','Zion',sysdate());
