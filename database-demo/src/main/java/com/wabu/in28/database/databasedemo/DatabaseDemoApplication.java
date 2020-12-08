@@ -27,5 +27,9 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 		logger.info("User 1001 -> {}", dao.findById(1001));
 		logger.info("Users with location 'MiddleEarth' -> {}",
 				dao.findByLocation("MiddleEarth"));
+		logger.info("Deleting 1005 -> Number of rows Deleted => {}",
+				dao.deleteById(1005));
+		logger.info("Deleting All From MiddleEarth -> number of rows deleted => {}",
+				dao.deleteByLocation("MiddleEarth"));
 	}
 }
