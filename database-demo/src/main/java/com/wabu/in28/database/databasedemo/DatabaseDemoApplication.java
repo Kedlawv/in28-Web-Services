@@ -1,5 +1,6 @@
 package com.wabu.in28.database.databasedemo;
 
+import com.wabu.in28.database.databasedemo.entity.Person;
 import com.wabu.in28.database.databasedemo.jdbc.PersonJdbcDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Date;
 
 @SpringBootApplication
 public class DatabaseDemoApplication implements CommandLineRunner {
@@ -31,5 +34,10 @@ public class DatabaseDemoApplication implements CommandLineRunner {
 				dao.deleteById(1005));
 		logger.info("Deleting All From MiddleEarth -> number of rows deleted => {}",
 				dao.deleteByLocation("MiddleEarth"));
+		Person morpheus = new Person(1006,"Morpheus","Zion", new Date());
+		logger.info("insert person: {} -> inserted no of rows {}",morpheus, dao.insert(morpheus));
+		morpheus.setLocation("Matrix");
+		logger.info("update person -> {} | no of rows updated {}", morpheus, dao.update(morpheus));
+
 	}
 }
