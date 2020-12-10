@@ -14,32 +14,32 @@ import java.util.Date;
 @SpringBootApplication
 public class JpaDemoApplication implements CommandLineRunner {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	PersonJpaRepository repository;
+    @Autowired
+    PersonJpaRepository repository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(JpaDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JpaDemoApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-		logger.info("User 1001 -> {}", repository.findById(1001));
+        logger.info("User 1001 -> {}", repository.findById(1001));
 
 //		logger.info("All users -> {}", repository.findAll());
 //		logger.info("Users with location 'MiddleEarth' -> {}",
 //				repository.findByLocation("MiddleEarth"));
-//		logger.info("Deleting 1005 -> Number of rows Deleted => {}",
-//				repository.deleteById(1005));
+        logger.info("Deleting 1005 ");
+        repository.deleteById(1005);
 //		logger.info("Deleting All From MiddleEarth -> number of rows deleted => {}",
 //				repository.deleteByLocation("MiddleEarth"));
-		Person morpheus = new Person("Morpheus","Zion", new Date());
-		logger.info("insert person: {} -> \n person inserted {}",morpheus, repository.insert(morpheus));
-		morpheus = repository.findById(1);
-		morpheus.setLocation("Matrix");
-		logger.info("update person -> {} | \n person updated {}", morpheus, repository.update(morpheus));
+        Person morpheus = new Person("Morpheus", "Zion", new Date());
+        logger.info("insert person: {} -> \n person inserted {}", morpheus, repository.insert(morpheus));
+        morpheus = repository.findById(1);
+        morpheus.setLocation("Matrix");
+        logger.info("update person -> {} | \n person updated {}", morpheus, repository.update(morpheus));
 
-	}
+    }
 }
