@@ -35,10 +35,11 @@ public class JpaDemoApplication implements CommandLineRunner {
 //				repository.deleteById(1005));
 //		logger.info("Deleting All From MiddleEarth -> number of rows deleted => {}",
 //				repository.deleteByLocation("MiddleEarth"));
-//		Person morpheus = new Person(1006,"Morpheus","Zion", new Date());
-//		logger.info("insert person: {} -> inserted no of rows {}",morpheus, repository.insert(morpheus));
-//		morpheus.setLocation("Matrix");
-//		logger.info("update person -> {} | no of rows updated {}", morpheus, repository.update(morpheus));
+		Person morpheus = new Person("Morpheus","Zion", new Date());
+		logger.info("insert person: {} -> \n person inserted {}",morpheus, repository.insert(morpheus));
+		morpheus = repository.findById(1);
+		morpheus.setLocation("Matrix");
+		logger.info("update person -> {} | \n person updated {}", morpheus, repository.update(morpheus));
 
 	}
 }
