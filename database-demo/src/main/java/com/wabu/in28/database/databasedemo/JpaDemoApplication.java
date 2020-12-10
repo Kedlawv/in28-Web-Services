@@ -28,7 +28,6 @@ public class JpaDemoApplication implements CommandLineRunner {
 
         logger.info("User 1001 -> {}", repository.findById(1001));
 
-//		logger.info("All users -> {}", repository.findAll());
 //		logger.info("Users with location 'MiddleEarth' -> {}",
 //				repository.findByLocation("MiddleEarth"));
         logger.info("Deleting 1005 ");
@@ -40,6 +39,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         morpheus = repository.findById(1);
         morpheus.setLocation("Matrix");
         logger.info("update person -> {} | \n person updated {}", morpheus, repository.update(morpheus));
+        logger.info("All users -> {}", repository.findAll());
+
 
     }
 }
