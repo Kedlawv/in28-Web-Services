@@ -14,7 +14,7 @@ public class Course {
     private String name;
 
     protected Course(){
-        
+
     }
 
     public Course(String name){
@@ -31,5 +31,13 @@ public class Course {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "\nCourse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
