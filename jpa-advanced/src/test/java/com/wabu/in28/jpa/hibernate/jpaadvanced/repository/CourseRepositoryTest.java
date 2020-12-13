@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -18,6 +23,9 @@ class CourseRepositoryTest {
     @Autowired
     CourseRepository repository;
 
+    @Autowired
+    EntityManager em;
+
     @Test
     public void findById_basic() {
         Course course = repository.findById(1001L);
@@ -26,7 +34,8 @@ class CourseRepositoryTest {
     }
 
     @Test
-    @DirtiesContext   // spring will reset data before running other tests
+    @DirtiesContext
+        // spring will reset data before running other tests
     void deleteById() {
         Long idToDelete = 1001L;
         Course course = repository.findById(idToDelete);
@@ -39,7 +48,7 @@ class CourseRepositoryTest {
 
     @Test
     @DirtiesContext
-    public void save(){
+    public void save() {
         Course newCourse = new Course("Test");
         Course savedCourse = repository.save(newCourse);
         assertEquals("Test",
@@ -55,7 +64,19 @@ class CourseRepositoryTest {
 
     @Test
     @DirtiesContext
-    public void playWithEm(){
+    public void playWithEm() {
         repository.playWithEm();
+    }
+
+    @Test
+    public void nativeQuireWithParameter() {
+        Query queryPositionalParam = em.createNativeQuery("SELECT * FROM COURSE WHERE id=?", Course.class);
+        Query queryNamedParam = em.createNativeQuery("SELECT * FROM COURSE WHERE id= :id", Course.class);
+        queryPositionalParam.setParameter(1, 1001L);
+        queryNamedParam.setParameter("id", 1001L);
+
+        List<Course> resultList = queryPositionalParam.getResultList();
+        logger.info("\n -- SELECT * FROM COURSE WHERE id=1001 \n=> {}", resultList.get(0).getName());
+        assertEquals("JPA Advanced", resultList.get(0).getName());
     }
 }
