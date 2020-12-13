@@ -51,6 +51,11 @@ class CourseRepositoryTest {
         assertEquals("Test Update",
                 repository.findById(savedCourse.getId()).getName(),
                 "Update failed!");
+    }
 
+    @Test
+    @DirtiesContext
+    public void playWithEm(){
+        repository.playWithEm();
     }
 }

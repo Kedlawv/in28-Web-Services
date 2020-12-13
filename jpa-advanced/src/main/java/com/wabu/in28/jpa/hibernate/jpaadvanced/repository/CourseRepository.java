@@ -1,6 +1,8 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,8 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public class CourseRepository {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     EntityManager em;
@@ -29,6 +33,22 @@ public class CourseRepository {
         } else {
             em.merge(course);
         }
+        return course;
+    }
+
+    public Course playWithEm(){
+        Course course = new Course("em tracking");
+        logger.info("\n---after creation id => {}", course.getId());
+
+        em.persist(course);
+        logger.info("\n---after persisting id => {}", course.getId());
+
+        // triggers db update ↓
+        // because our class is @Transactional all methods are treated as transactions
+        // and because em is tracking the created Course entity.
+        // Any changes to the entity within the transaction are persisted
+        // even if there is no explicit call to em.merge()
+        course.setName("em tracking - updated");
         return course;
     }
 
