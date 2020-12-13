@@ -51,6 +51,8 @@ public class CourseRepository {
         course.setName("em tracking - updated");
         // em.detach(course); remove the object from em tracking
         // em.clear(); remove all objects from em tracking
+        // em.flush() -> pushes changes of the object to the db
+        // em.refresh() -> is pulling data of the object from the db
 
 
         return course;
