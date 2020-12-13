@@ -49,6 +49,10 @@ public class CourseRepository {
         // Any changes to the entity within the transaction are persisted
         // even if there is no explicit call to em.merge()
         course.setName("em tracking - updated");
+        // em.detach(course); remove the object from em tracking
+        // em.clear(); remove all objects from em tracking
+
+
         return course;
     }
 
