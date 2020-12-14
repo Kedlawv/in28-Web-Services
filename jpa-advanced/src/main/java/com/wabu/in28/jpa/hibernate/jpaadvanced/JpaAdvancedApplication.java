@@ -2,6 +2,7 @@ package com.wabu.in28.jpa.hibernate.jpaadvanced;
 
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.repository.CourseRepository;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class JpaAdvancedApplication implements CommandLineRunner {
 
     @Autowired
     CourseRepository repository;
+    @Autowired
+    StudentRepository studentRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,5 +35,6 @@ public class JpaAdvancedApplication implements CommandLineRunner {
 //        logger.info("\nUpdating Course ... \nCourse updated => {}",
 //                repository.save(microCourse));
 
+        studentRepository.saveWithPassport("Frodo","ME000001");
     }
 }
