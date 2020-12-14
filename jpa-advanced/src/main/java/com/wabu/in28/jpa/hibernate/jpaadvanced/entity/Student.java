@@ -1,9 +1,6 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Student {
@@ -14,6 +11,10 @@ public class Student {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToOne
+    private Passport passport; // JPA will create a column named passport_id because of the OneToOne relationship
+                                // it will aslo set the passport field as a foreign key in the db
 
     protected Student() {
     }
@@ -28,6 +29,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     public Long getId() {
