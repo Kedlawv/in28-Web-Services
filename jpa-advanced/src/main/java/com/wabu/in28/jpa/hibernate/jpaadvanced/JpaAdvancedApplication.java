@@ -23,14 +23,14 @@ public class JpaAdvancedApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Course course = repository.findById(1001L);
-        logger.info("Course 1001 => {}", course);
-        logger.info("\nSaving a new Course... \n Course saved => {}",
-                repository.save(new Course("Microservices in 100 steps")));
-        Course microCourse = repository.findById(1L);
-        microCourse.setName("Microservices in 150 steps");
-        logger.info("\nUpdating Course ... \nCourse updated => {}",
-                repository.save(microCourse));
+//        Course course = repository.findById(1001L);
+//        logger.info("Course 1001 => {}", course);
+//        logger.info("\nSaving a new Course... \n Course saved => {}",
+//                repository.save(new Course("Microservices in 100 steps")));
+//        Course microCourse = repository.findById(1L);
+//        microCourse.setName("Microservices in 150 steps");
+//        logger.info("\nUpdating Course ... \nCourse updated => {}",
+//                repository.save(microCourse));
 
     }
 }
