@@ -1,10 +1,14 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Passport;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +17,9 @@ class StudentRepositoryTest {
 
     @Autowired
     StudentRepository repository;
+
+    @Autowired
+    EntityManager em;
 
     @Test
     @DirtiesContext
@@ -37,5 +44,15 @@ class StudentRepositoryTest {
         Student student = repository.findById(2001L);
 
         assertEquals("Kedlaw", student.getName());
+    }
+
+    @Test
+    @Transactional
+    public void retrievePassportAndAssociatedStudent(){
+        Passport passport = em.find(Passport.class, 4001L);
+        Student student = passport.getStudent();
+
+        assertEquals("12B31234",passport.getNumber());
+        assertEquals("Kedlaw",student.getName());
     }
 }
