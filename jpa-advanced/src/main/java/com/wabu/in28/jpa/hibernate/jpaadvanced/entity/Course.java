@@ -1,9 +1,6 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +15,12 @@ public class Course {
 
     @OneToMany(mappedBy = "course") // Lazy fetch by default (all ToMany)
     private List<Review> reviews = new ArrayList<>();
+
+    // ↓ With ManyToMany relationship one side needs to own the relationship to avoid duplicating the
+    // joint tables (STUDENT_COURSES COURSES_STUDENTS) in this case it doesn't matter which side
+    // as data is put in a new table not a column of the entities table
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
 
     protected Course(){
 
@@ -45,6 +48,18 @@ public class Course {
 
     public void removeReview(Review review) {
         this.reviews.remove(review);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student){
+        students.add(student);
+    }
+
+    public void removeStudent(Student student){
+        students.remove(student);
     }
 
     public Long getId() {
