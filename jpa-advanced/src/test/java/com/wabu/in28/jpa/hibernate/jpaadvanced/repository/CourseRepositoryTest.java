@@ -1,6 +1,7 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Review;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -78,5 +80,15 @@ class CourseRepositoryTest {
         List<Course> resultList = queryPositionalParam.getResultList();
         logger.info("\n -- SELECT * FROM COURSE WHERE id=1001 \n=> {}", resultList.get(0).getName());
         assertEquals("JPA Advanced", resultList.get(0).getName());
+    }
+
+    @Test
+    @Transactional
+    public void getReviewsFromCourse(){
+        Course course = em.find(Course.class, 1001L);
+        List<Review> reviews = course.getReviews();
+
+        assertEquals("JPA Advanced",course.getName());
+        assertEquals("Great Course",reviews.get(0).getDescription());
     }
 }
