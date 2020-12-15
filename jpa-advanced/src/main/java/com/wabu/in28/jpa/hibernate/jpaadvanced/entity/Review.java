@@ -13,7 +13,7 @@ public class Review {
     private Long id;
     private String rating;
     private String description;
-    @ManyToOne
+    @ManyToOne  // Eager fetching by default (all toOne)
     private Course course;
 
     protected Review(){

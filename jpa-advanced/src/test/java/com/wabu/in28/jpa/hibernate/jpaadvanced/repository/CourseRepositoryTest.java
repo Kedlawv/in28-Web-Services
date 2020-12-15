@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -84,11 +85,39 @@ class CourseRepositoryTest {
 
     @Test
     @Transactional
-    public void getReviewsFromCourse(){
+    public void getReviewsFromCourse() {
         Course course = em.find(Course.class, 1001L);
         List<Review> reviews = course.getReviews();
 
-        assertEquals("JPA Advanced",course.getName());
-        assertEquals("Great Course",reviews.get(0).getDescription());
+        assertEquals("JPA Advanced", course.getName());
+        assertEquals("Great Course", reviews.get(0).getDescription());
+    }
+
+    @Test
+    @DirtiesContext
+    public void addReviewToCourse() {
+        Long courseId = 1001L;
+        String rating = "6";
+        String description = "Testing...";
+
+        Review review = repository.addReviewForCourse(courseId, rating, description);
+
+        assertEquals(description, em.find(Review.class, review.getId()).getDescription());
+    }
+
+    @Test
+    @DirtiesContext
+    public void addReviewsToCourse() {
+        Long courseId = 1001L;
+        List<Review> reviews = new ArrayList<>();
+        Review review1 = new Review("7", "Testing 1234 ...");
+        Review review2 = new Review("7", "Testing 5678 ...");
+        reviews.add(review1);
+        reviews.add(review2);
+
+        reviews = repository.addReviewsForCourse(courseId, reviews);
+
+        assertEquals(review1.getDescription(), em.find(Review.class, reviews.get(0).getId()).getDescription());
+        assertEquals(review2.getDescription(), em.find(Review.class, reviews.get(1).getId()).getDescription());
     }
 }

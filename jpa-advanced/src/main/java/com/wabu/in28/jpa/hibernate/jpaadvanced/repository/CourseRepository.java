@@ -1,6 +1,7 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -36,7 +38,7 @@ public class CourseRepository {
         return course;
     }
 
-    public Course playWithEm(){
+    public Course playWithEm() {
         Course course = new Course("em tracking");
         logger.info("\n---after creation id => {}", course.getId());
 
@@ -56,6 +58,23 @@ public class CourseRepository {
 
 
         return course;
+    }
+
+    public Review addReviewForCourse(Long courseId, String rating, String description) {
+        Course course = em.find(Course.class, courseId);
+        Review review = new Review(rating, description);
+        review.setCourse(course);
+        em.persist(review);
+        return review;
+    }
+
+    public List<Review> addReviewsForCourse(Long courseId, List<Review> reviews) {
+        Course course = em.find(Course.class, courseId);
+        for (Review review : reviews) {
+            review.setCourse(course);
+            em.persist(review);
+        }
+        return reviews;
     }
 
 }

@@ -16,7 +16,7 @@ public class Course {
 
     private String name;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course") // Lazy fetch by default (all ToMany)
     private List<Review> reviews = new ArrayList<>();
 
     protected Course(){
