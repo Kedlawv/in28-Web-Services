@@ -88,4 +88,17 @@ class StudentRepositoryTest {
         assertEquals("Ewa",students.get(2).getName());
 
     }
+
+    @Test
+    @Transactional
+    public void enrollStudent(){
+        Student student = em.find(Student.class, 2001L);
+        Course course = em.find(Course.class, 1002L);
+
+        repository.enrollStudent(student,course);
+        Student actualStudent = em.find(Student.class, 2001L);
+
+        assertTrue(actualStudent.getCourses().contains(course));
+    }
+
 }

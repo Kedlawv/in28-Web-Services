@@ -1,5 +1,6 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Passport;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class StudentRepository {
 
         em.persist(student);
         return student;
+    }
+
+    public void enrollStudent(Student student, Course course){
+        student.addCourse(course);
+        em.persist(student);
     }
 }
