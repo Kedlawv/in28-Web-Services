@@ -24,6 +24,9 @@ public class Student {
     inverseJoinColumns = @JoinColumn(name="COURSE_ID"))
     private List<Course> courses = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student")
+    List<Review> reviews = new ArrayList<>();
+
     protected Student() {
     }
 
@@ -58,6 +61,20 @@ public class Student {
     public void removeCourse(Course course){
         courses.remove(course);
     }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void addReview(Review review){
+        reviews.add(review);
+    }
+
+    public void removeReview(Review review){
+        reviews.remove(review);
+    }
+
+
 
     public Long getId() {
         return id;

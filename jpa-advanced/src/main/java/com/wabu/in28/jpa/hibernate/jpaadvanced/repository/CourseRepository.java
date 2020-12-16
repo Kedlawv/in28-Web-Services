@@ -2,6 +2,7 @@ package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Review;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,16 @@ public class CourseRepository {
         Course course = em.find(Course.class, courseId);
         Review review = new Review(rating, description);
         review.setCourse(course);
+        em.persist(review);
+        return review;
+    }
+
+    public Review addReviewForCourse(Long courseId, String rating, String description, Long studentId) {
+        Course course = em.find(Course.class, courseId);
+        Student student = em.find(Student.class, studentId);
+        Review review = new Review(rating, description);
+        review.setCourse(course);
+        review.setStudent(student);
         em.persist(review);
         return review;
     }

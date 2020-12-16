@@ -16,6 +16,9 @@ public class Review {
     @ManyToOne  // Eager fetching by default (all toOne)
     private Course course;
 
+    @ManyToOne
+    Student student;
+
     protected Review(){
 
     }
@@ -47,6 +50,14 @@ public class Review {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public Long getId() {

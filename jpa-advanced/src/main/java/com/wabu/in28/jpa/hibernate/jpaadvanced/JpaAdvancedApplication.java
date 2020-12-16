@@ -45,5 +45,6 @@ public class JpaAdvancedApplication implements CommandLineRunner {
         studentRepository.saveWithPassport("Frodo","ME000001");
         courseRepository.addReviewForCourse(1002L,"5","Great Hands-on Stuff");
         courseRepository.addReviewsForCourse(1002L, reviews);
+        courseRepository.addReviewForCourse(1001L,"5","In-depth",2002L);
     }
 }
