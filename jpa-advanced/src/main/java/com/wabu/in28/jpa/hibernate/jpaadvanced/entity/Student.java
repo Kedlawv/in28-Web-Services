@@ -16,9 +16,12 @@ public class Student {
 
     @OneToOne
     private Passport passport; // JPA will create a column named passport_id because of the OneToOne relationship
-                                // it will aslo set the passport field as a foreign key in the db
+                                // it will also set the passport field as a foreign key in the db
 
     @ManyToMany
+    @JoinTable(name="STUDENT_COURSE",
+    joinColumns = @JoinColumn(name="STUDENT_ID"),
+    inverseJoinColumns = @JoinColumn(name="COURSE_ID"))
     private List<Course> courses = new ArrayList<>();
 
     protected Student() {
