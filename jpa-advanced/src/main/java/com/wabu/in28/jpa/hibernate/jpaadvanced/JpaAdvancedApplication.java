@@ -1,8 +1,11 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced;
 
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.FullTimeEmployee;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.PartTimeEmployee;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Review;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.repository.CourseRepository;
+import com.wabu.in28.jpa.hibernate.jpaadvanced.repository.EmployeeRepository;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +31,8 @@ public class JpaAdvancedApplication implements CommandLineRunner {
     CourseRepository courseRepository;
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -46,5 +52,9 @@ public class JpaAdvancedApplication implements CommandLineRunner {
         courseRepository.addReviewForCourse(1002L,"5","Great Hands-on Stuff");
         courseRepository.addReviewsForCourse(1002L, reviews);
         courseRepository.addReviewForCourse(1001L,"5","In-depth",2002L);
+        employeeRepository.insert(new FullTimeEmployee("Jacek", new BigDecimal("10000")));
+        employeeRepository.insert(new PartTimeEmployee("Joanna", new BigDecimal("50")));
+        logger.info("\n -------All employees => {}", employeeRepository.retrieveAllEmployees());
+
     }
 }
