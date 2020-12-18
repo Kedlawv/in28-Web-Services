@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -72,6 +75,25 @@ class CourseSpringDataRepositoryTest {
         assertEquals("A", actualCourses.get(0).getName());
         assertEquals("B", actualCourses.get(1).getName());
         assertEquals("C", actualCourses.get(2).getName());
+    }
+
+    @Test
+    @DirtiesContext
+    public void pagination(){
+        for(int i=1; i<20; i++){
+            repository.save(new Course(String.valueOf(i)));
+        }
+
+        PageRequest pageRequest= PageRequest.of(0,3);
+        Page<Course> firstPage = repository.findAll(pageRequest);
+        List<Course> firstPageContent = firstPage.getContent();
+
+        Pageable secondPageable = firstPage.nextPageable();
+        Page<Course> secondPage = repository.findAll(secondPageable);
+        List<Course> secondPageContent = secondPage.getContent();
+
+        assertEquals(3, firstPage.getSize());
+        assertEquals(3, secondPage.getSize());
     }
 
 
