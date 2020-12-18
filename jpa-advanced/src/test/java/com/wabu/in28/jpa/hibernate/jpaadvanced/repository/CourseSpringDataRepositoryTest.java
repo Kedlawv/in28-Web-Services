@@ -96,5 +96,35 @@ class CourseSpringDataRepositoryTest {
         assertEquals(3, secondPage.getSize());
     }
 
+    @Test
+    public void findByName(){
+        assertEquals(1003L,
+                repository.findByName("Spring Boot in 100 steps")
+                        .get(0).getId());
+    }
+
+    @Test
+    @DirtiesContext
+    public void countByName(){
+        repository.save(new Course("Test"));
+        repository.save(new Course("Test"));
+        assertEquals(2, repository.countByName("Test"));
+    }
+
+    @Test
+    public void selectALLJPQL(){
+        assertEquals(3, repository.selectAllJPQL().size());
+    }
+
+    @Test
+    public void selectAllNative(){
+        assertEquals(3, repository.selectAllNative().size());
+    }
+
+    @Test
+    public void findByNameContaining(){
+        assertEquals(2, repository.findByNameContaining("steps").size());
+    }
+
 
 }
