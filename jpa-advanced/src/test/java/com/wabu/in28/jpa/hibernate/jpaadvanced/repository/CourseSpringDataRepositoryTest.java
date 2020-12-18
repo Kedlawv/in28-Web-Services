@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CourseSpringDataRepositoryTest {
@@ -34,6 +33,19 @@ class CourseSpringDataRepositoryTest {
         logger.info("{}",courseOptional.isPresent());
 
         assertFalse(courseOptional.isPresent());
+    }
+
+    @Test
+    public void saveAndUpdate(){
+        Course course = new Course("Testing...");
+        repository.save(course);
+        logger.info("\n---Course => {}", course);
+        course.setName("Testing... Updated");
+        repository.save(course);
+        
+        Optional<Course> actualCourse = repository.findById(course.getId());
+        if(!actualCourse.isPresent()) { fail("Item not found!");}
+        assertEquals("Testing... Updated", actualCourse.get().getName());
     }
 
 
