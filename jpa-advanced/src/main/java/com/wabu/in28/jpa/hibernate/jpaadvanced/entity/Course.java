@@ -1,5 +1,8 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class Course {
     // joint tables (STUDENT_COURSES COURSES_STUDENTS) in this case it doesn't matter which side
     // as data is put in a new table not a column of the entities table
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     protected Course(){
@@ -50,6 +54,7 @@ public class Course {
         this.reviews.remove(review);
     }
 
+    @JsonIgnore
     public List<Student> getStudents() {
         return students;
     }

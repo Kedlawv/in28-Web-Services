@@ -3,9 +3,11 @@ package com.wabu.in28.jpa.hibernate.jpaadvanced.repository;
 import com.wabu.in28.jpa.hibernate.jpaadvanced.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+@RepositoryRestResource(path = "courses")
 public interface CourseSpringDataRepository extends JpaRepository<Course,Long> {
 
     List<Course> findByName(String name); // methods are implemented by spring according to the name of the method
