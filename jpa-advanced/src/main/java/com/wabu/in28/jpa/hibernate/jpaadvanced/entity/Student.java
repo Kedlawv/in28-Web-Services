@@ -1,13 +1,9 @@
 package com.wabu.in28.jpa.hibernate.jpaadvanced.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonIgnoreType
 @Entity
 public class Student {
 
