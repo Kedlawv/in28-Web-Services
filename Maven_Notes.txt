@@ -1,0 +1,12 @@
+Maven Clean => deletes target folder
+Maven Compile => compiles all .java files in to .class files in the Target folder
+Maven Test-Compile => compiles the project files and test files
+Maven Test in intelliJ is skipping running test by deafault | To force running the tests run mvn test -Dmaven.test.skip=false
+		report of the test is saved in the target/surefire-reports
+Maven install => creates a jar file for the project in the root of Target folder and installs it to the local repository
+Maven Package => creates a jar without installing it to the local repository
+
+Maven build life cycle :
+Validate -> Compile -> Test -> Package -> Integration Tests -> Verify -> Install -> Deploy
+
+Every time a maven goal is executed all of the goals before it in the build life cycle are executed as well
