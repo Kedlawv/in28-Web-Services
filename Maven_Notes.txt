@@ -22,3 +22,5 @@ Super pom => a pom file containing a lot of information about configuration of t
 repository adress ect 
 mvn help:effective-pom -Doutput=effective-pom.xml => is a maven goal that generates a super pom file and writes it to a file
 -D is how we set parameters
+
+mvn help:effective-settings contains information on the adress of the local repository
