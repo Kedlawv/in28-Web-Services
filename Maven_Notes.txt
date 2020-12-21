@@ -24,3 +24,19 @@ mvn help:effective-pom -Doutput=effective-pom.xml => is a maven goal that genera
 -D is how we set parameters
 
 mvn help:effective-settings contains information on the adress of the local repository
+
+Multi module Maven -> we create a project with <packaging>pom to serve as a parent. Then we create modules inside the project 
+The modules will have their own poms with default jar packaging 
+Modules are referenced in the parent pom and parent pom is referenced inside the child poms
+
+Good practice is to let the parent pom to manage the versions of dependecies <dependencyManegment> we declare the dependencies and versions
+in the parent and we declare only groupId and artifactId in the children
+
+We can also add to poms of the modules dependencies to other moduls in the project. In the example we add dependency of data module to business
+module.
+
+${project.version} => Maven built in variable
+
+mvn -X runs maven in debug mode
+mvn -X clean install >> sample.txt will output log to a file
+mvn --help 
