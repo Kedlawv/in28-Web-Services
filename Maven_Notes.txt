@@ -15,3 +15,10 @@ Snapshot on the version number means that the application is in development
 
 Transient Dependencies are dependencies of dependencies
 Maven Helper Plugin is hlepful in resolving dependency conflicts
+
+Versions => We can specify a range of versions <version>[4.1,4.5]</version> '[' braket is inclusive '(' is exclusive
+
+Super pom => a pom file containing a lot of information about configuration of the project like default directory structure , default plugins,
+repository adress ect 
+mvn help:effective-pom -Doutput=effective-pom.xml => is a maven goal that generates a super pom file and writes it to a file
+-D is how we set parameters
