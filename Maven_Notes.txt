@@ -10,3 +10,8 @@ Maven build life cycle :
 Validate -> Compile -> Test -> Package -> Integration Tests -> Verify -> Install -> Deploy
 
 Every time a maven goal is executed all of the goals before it in the build life cycle are executed as well
+
+Snapshot on the version number means that the application is in development   
+
+Transient Dependencies are dependencies of dependencies
+Maven Helper Plugin is hlepful in resolving dependency conflicts
