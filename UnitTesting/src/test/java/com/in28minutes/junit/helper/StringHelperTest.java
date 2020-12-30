@@ -19,8 +19,16 @@ class StringHelperTest {
         assertEquals("CD",
                 stringHelper.truncateAInFirst2Positions("ACD"));
     }
+    // absence of failure is a success , no body in the test will result in
+    // test success
 
     @Test
-    void areFirstAndLastTwoCharactersTheSame() {
+    void areFirstAndLastTwoCharactersTheSame_4LetterFail() {
+        assertFalse(stringHelper.areFirstAndLastTwoCharactersTheSame("ABCD"));
+    }
+
+    @Test
+    void areFirstAndLastTwoCharactersTheSame_4LetterSuccess() {
+        assertTrue(stringHelper.areFirstAndLastTwoCharactersTheSame("ABAB"));
     }
 }
