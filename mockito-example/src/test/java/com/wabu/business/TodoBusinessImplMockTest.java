@@ -1,7 +1,6 @@
 package com.wabu.business;
 
 import com.wabu.data.api.TodoService;
-import com.wabu.data.api.TodoServiceStub;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,8 +9,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 class TodoBusinessImplMockTest {
 
@@ -51,5 +50,18 @@ class TodoBusinessImplMockTest {
                 todoBusiness.retrieveTodosRelatedToSpring("Dummy");
 
         assertIterableEquals(expected, filteredTodos);
+    }
+
+    @Test
+    public void deleteCalledWithArgument(){
+        TodoService mockTodoService = mock(TodoService.class);
+        List<String> allTodos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to Dance");
+        given(mockTodoService.retrieveTodos(anyString())).willReturn(allTodos);
+
+        TodoBusinessImpl todoBusiness = new TodoBusinessImpl(mockTodoService);
+        todoBusiness.deleteTodosNotRelatedToSpring("Dummy");
+
+        verify(mockTodoService).deleteTodo("Learn to Dance"); // verify that this method was called with this
+                                                                // argument
     }
 }
